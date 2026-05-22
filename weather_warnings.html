@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Warnings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header class="navbar-container">
+        <h1>Weather Warnings</h1>
+        <div class="search-group">
+            <input type="search" placeholder="Enter city name">
+            <button type="submit">Search</button>
+
+            <select id="navigation-dropdown">
+                <option value="" disabled selected>Jump to page</option>
+                <option value="home.html">Home</option>
+                <option value="year_module.html">Year Module</option>
+                <option value="map.html">Map</option>
+                <option value="settings.html">Settings</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="warnings-container">
+        <h2>Active Alerts</h2>
+        <div id="warnings-list">
+            <p>Fetching active warnings...</p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

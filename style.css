@@ -1,0 +1,321 @@
+/* Global Variables & Reset */
+:root {
+    --primary-color: #2c3e50; /* Dark blue-grey for headers */
+    --accent-color: #3498db;  /* Bright blue for buttons */
+    --bg-color: #f4f7f6;      /* Light grey/green background */
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --border-radius: 8px;
+}
+
+/* Dark Mode Overrides - JS applies the 'dark-mode' class to the body */
+body.dark-mode {
+    --primary-color: #1a1a1a;
+    --accent-color: #2980b9;
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    /* Smooth transition when clicking the Dark Mode toggle */
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+/* Master Layout Containers */
+main {
+    /* Centers all your main content blocks on the screen */
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* The Master Navigation Bar */
+.navbar-container {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap; /* Allows the search bar to drop down on small mobile screens */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-container h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.search-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+/* Styling the inputs and dropdown */
+input[type="search"], select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    background-color: white;
+    color: #333;
+}
+
+/* The Search Button */
+button[type="submit"] {
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9; /* Slightly darker on hover */
+}
+
+/* Make sure inputs don't look weird in dark mode */
+body.dark-mode input[type="search"], 
+body.dark-mode select {
+    background-color: #444;
+    color: white;
+    border-color: #555;
+}
+/* Home Page */
+.weather-container {
+    text-align: center; /* Centers all the text in the main block */
+    padding: 1rem 0;
+}
+
+.weather-header .location {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.2rem;
+}
+
+.weather-header .date {
+    font-size: 1.1rem;
+    color: #7f8c8d; 
+    margin-bottom: 2rem;
+}
+#home-alert-banner {
+    background-color: #dc3545; /* Emergency Red */
+    color: white;
+    padding: 10px;
+    margin: 10px 20px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: pulse 2s infinite; /* Makes it grab attention */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Big Temperature Display */
+.temp-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 6rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--primary-color);
+}
+
+.temp-display .unit {
+    font-size: 2rem; 
+    margin-top: 0.5rem;
+}
+
+/* Weather Icon and Condition */
+.weather-icon {
+    width: 120px;
+    height: 120px;
+    margin: -10px auto; 
+    border-radius: 16px; 
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+.condition {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+}
+
+/* Weather Details Footer */
+.weather-details {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    flex-wrap: wrap; 
+    background-color: rgba(0, 0, 0, 0.03); 
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: 100px;
+}
+
+.detail-item .label {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-item .value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Dark Mode Overrides for Home Page */
+body.dark-mode .weather-header .location,
+body.dark-mode .temp-display,
+body.dark-mode .detail-item .value {
+    color: var(--text-color);
+}
+
+body.dark-mode .weather-details {
+    background-color: rgba(255, 255, 255, 0.05); 
+}
+/* Weather Warnings Page */
+.warnings-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Styling the alert cards generated by JS */
+#warnings-list div {
+    background-color: #fff3cd;
+    border-left: 5px solid #ffc107; 
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#warnings-list h3 {
+    color: #856404; 
+    margin-bottom: 0.5rem;
+}
+
+#warnings-list p {
+    color: #333;
+}
+
+/* Hide the default horizontal line injected by the JS */
+#warnings-list hr {
+    display: none; 
+}
+
+/* Dark Mode specific overrides for Alerts */
+body.dark-mode #warnings-list div {
+    background-color: #332701;
+    border-left-color: #ffc107;
+}
+
+body.dark-mode #warnings-list h3 {
+    color: #ffdf7e;
+}
+
+body.dark-mode #warnings-list p {
+    color: #ddd;
+}
+
+/* Year Module Page (Data Grid) */
+.year-controls {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.year-controls label {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* The CSS Grid that auto-arranges the months */
+#yearly-data-display {
+    display: grid;
+    /* This automatically figures out how many 120px blocks fit in the row */
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Styling each individual month block */
+.month-card {
+    background-color: var(--bg-color);
+    /* Using !important to override the inline border from your JavaScript */
+    border: 1px solid #ddd !important; 
+    border-radius: var(--border-radius);
+    padding: 1.5rem !important;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+/* Adds a subtle hover effect to the blocks */
+.month-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-color) !important;
+}
+
+.month-card strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Dark Mode Overrides for the Grid */
+body.dark-mode .year-controls label,
+body.dark-mode .month-card strong {
+    color: var(--text-color);
+}
+
+body.dark-mode .month-card {
+    border-color: #444 !important;
+    background-color: var(--card-bg);
+}
